@@ -47,4 +47,5 @@ export default function App() {
 
 const StyledApp = styled.div`
   text-align: center;
+  background-color: #3a243b;
 `

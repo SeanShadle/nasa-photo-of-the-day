@@ -3,7 +3,9 @@ import styled from 'styled-components'
 
 
 const StyledPhoto = styled.img`
-opacity: .5;
+    max-height: 75vh;
+    overflow: none;
+    margin-top: 3px;
 `
 
 export default function Photo({url}){
