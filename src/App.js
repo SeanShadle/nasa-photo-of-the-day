@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from "react";
-import "./App.css";
 import axios from 'axios'
 import {API_KEY, BASE_URL} from "./index"
-import Photo from "./Photo"
-import DatePicker from './DatePicker'
+import Title from "./Components/Title"
+import Photo from "./Components/Photo"
+import Explanation from "./Components/Explanation"
+import Copyright from "./Components/Copyright"
+import formatDate from './Components/Formatdate'
+import styled from "styled-components"
 
 
 export default function App() {
@@ -12,20 +15,6 @@ export default function App() {
   const [copyright, setCopyright] = useState('')
   const [title, setTitle] = useState(null)
   const [explanation, setExplanation] = useState(null)
-
-  function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
 
   useEffect(() => {
     axios
@@ -42,21 +31,20 @@ export default function App() {
     }, [date]) 
     // ^^ include date because it wouldn't update when date changes otherwise 
   return (
-    <div className="App">
-      <div className = "title-container">
-        
-        <h1>NASA photo of the day</h1>
-        <span>Date: </span><DatePicker date={date} setDate={setDate} />
-        <h2>{title}</h2>
-      </div>
+    <StyledApp>
+      <Title date={date} setDate={setDate} title={title} />
       <div className="photo-container">
-        <Photo url={photoURL}/> 
+        <Photo url={photoURL}/>
         {/* Line 35 is where url comes from on line 3 on Photo.js */}
       </div>
       <div className = "info-container">
-        <p>{explanation}</p>
-        <p><b>Copyright:</b> {copyright}©</p>
+        <Explanation prop = {explanation}/>
+        <Copyright prop = {copyright}/>
       </div>
-    </div>
+    </StyledApp>
   );
 }
+
+const StyledApp = styled.div`
+  text-align: center;
+`
