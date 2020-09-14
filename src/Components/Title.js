@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import DatePicker from './DatePicker'
+import Button from "@material-ui/core/Button";
 
 export default function Title({date, setDate, title}){
     return (
@@ -8,6 +9,9 @@ export default function Title({date, setDate, title}){
             <PageTitle>NASA photo of the day</PageTitle>
             <SpanStyle>Date: </SpanStyle><DatePicker date={date} setDate={setDate} />
             <PictureTitle>"{title}"</PictureTitle>
+                {/* <Button onclick="buttonClick" variant="contained" color="primary">
+      Select Date
+    </Button> */}
         </TitleDiv>
     )
 }
